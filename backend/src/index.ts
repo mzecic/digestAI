@@ -1,14 +1,23 @@
 import express from "express";
 import cors from "cors";
 import dotenv from "dotenv";
-import digestRoute from "./routes/digest";
+import digestRoutes from "./routes/digest";
 
+// Load environment variables
 dotenv.config();
-const app = express();
 
+// Create Express app
+const app = express();
+const PORT = process.env.PORT || 5001;
+
+// Middleware
 app.use(cors());
 app.use(express.json());
 
-app.use("/digest", digestRoute);
+// Routes
+app.use("/api", digestRoutes);
 
-app.listen(5001, () => console.log("Server is running on port 5001"));
+// Start server
+app.listen(PORT, () => {
+  console.log(`Server running on port ${PORT}`);
+});
